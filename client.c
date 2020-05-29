@@ -22,9 +22,9 @@ int main(int argc, char *argv[]){
     }
 
     //Informa os dados do servidor para onde vamos nos conectar
-    server.sin_addr.s_addr = inet_addr("172.217.28.132");  // Converte IP para long
+    server.sin_addr.s_addr = inet_addr("127.0.0.1");  // Converte IP para long
     server.sin_family = AF_INET; //informa que é um IPV4
-    server.sin_port = htons(80);  //Especifica a porta
+    server.sin_port = htons(8888);  //Especifica a porta
 
 
     //Conecta ao servidor 
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
     printf("Conectado.\n");
 
     //Envia dados
-    message = "GET / HTTP/1.1\r\n\r\n";
+    message = "Olá, Mundo";
 
     if(send(socket_desc, message, strlen(message), 0) < 0){
         printf("Erro ao enviar\n");
