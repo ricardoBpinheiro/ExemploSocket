@@ -3,12 +3,13 @@
 #include <string.h>	//strlen
 #include <sys/socket.h>
 #include <arpa/inet.h> // inet_addr
+#include <unistd.h>  // close
 
 int main(int argc, char *argv[]){
     
     int socket_desc;
     struct sockaddr_in server;
-    char *message; 
+    char *message, server_reply[2000]; 
 
     socket_desc = socket(AF_INET, SOCK_STREAM, 0);
     // AF_INET = IPV4
@@ -42,6 +43,16 @@ int main(int argc, char *argv[]){
         return 1;
     }
     printf("Dados Enviados.\n");
+
+    // Recebe dados do servidor
+    if (recv(socket_desc, server_reply, 2000, 0) < 0){
+        printf("Falha no recv\n");
+        return 1;
+    }
+    printf("Resposta Recebida.\n");
+    printf("%s\n", server_reply);
+
+    close(socket_desc);
 
     return 0;
 }
