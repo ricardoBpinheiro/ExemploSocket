@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
     printf("Resposta Recebida.\n");
     printf("%s\n", server_reply);
 
-    close(socket_desc);
+    close(socket_desc); //fecha o socket
 
     return 0;
 }
